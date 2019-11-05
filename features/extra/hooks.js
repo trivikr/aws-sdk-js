@@ -4,9 +4,8 @@ var jmespath = require('jmespath');
 module.exports = function () {
   this.World = require('./world.js').World;
 
-  this.Before(function(callback) {
+  this.Before(function() {
     this.params = {};
-    callback();
   });
 
   /* Global S3 steps */
