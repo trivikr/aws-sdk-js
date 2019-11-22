@@ -1,7 +1,6 @@
 module.exports = function() {
-  this.Before("@configservice", function (callback) {
+  this.Before("@configservice", function () {
     this.service = new this.AWS.ConfigService();
-    callback();
   });
 
   // Add step definitions

@@ -1,7 +1,6 @@
 module.exports = function() {
-  this.Before("@waf", function (callback) {
+  this.Before("@waf", function () {
     this.service = new this.AWS.WAF();
-    callback();
   });
 
   // Add step definitions

@@ -1,13 +1,11 @@
 module.exports = function() {
-  this.Before("@iam", function (callback) {
+  this.Before("@iam", function () {
     this.iam = new this.AWS.IAM();
-    callback();
   });
 
   this.Given(/^I have an IAM username "([^"]*)"$/, function(name, callback) {
     this.iamUserArn = '';
     this.iamUser = this.uniqueName(name);
-    callback();
   });
 
   this.Given(/^I create an IAM user with the username$/, function(callback) {
@@ -15,7 +13,6 @@ module.exports = function() {
     var next = function() {
       if (world.data) this.iamUserArn = world.data.User.Arn;
       else this.iamUserArn = null;
-      callback();
     };
     next.fail = callback.fail;
     this.request('iam', 'createUser', {UserName: this.iamUser}, next, false);
@@ -30,7 +27,6 @@ module.exports = function() {
     this.assert.contains(this.data.Users, function(user) {
       return user.UserName === name;
     });
-    callback();
   });
 
   this.Then(/^I delete the IAM user$/, function(callback) {
@@ -48,7 +44,6 @@ module.exports = function() {
       AssumeRolePolicyDocument: assumeRolePolicyDocument};
     var next = function() {
       world.iamRoleArn = world.data.Role.Arn;
-      callback();
     }
     next.fail = callback.fail;
 
@@ -57,7 +52,6 @@ module.exports = function() {
 
   this.Then(/^the IAM role should exist$/, function(callback) {
     this.assert.compare(this.iamRoleArn.length, '>', 0);
-    callback();
   });
 
   this.Then(/^I delete the IAM role$/, function(callback) {

@@ -1,9 +1,8 @@
 module.exports = function() {
-  this.Before("@elastictranscoder", function (callback) {
+  this.Before("@elastictranscoder", function () {
     this.iam = new this.AWS.IAM();
     this.s3 = new this.AWS.S3();
     this.service = new this.AWS.ElasticTranscoder();
-    callback();
   });
 
   this.Given(/^I create an Elastic Transcoder pipeline with name prefix "([^"]*)"$/, function(prefix, callback) {
@@ -19,7 +18,6 @@ module.exports = function() {
     var world = this;
     var next = function() {
       if (world.data) world.pipelineId = world.data.Pipeline.Id;
-      callback();
     }
 
     this.request(null, 'createPipeline', params, next, false);
@@ -34,7 +32,6 @@ module.exports = function() {
     this.assert.contains(this.data.Pipelines, function (pipeline) {
       return pipeline.Id === id;
     });
-    callback();
   });
 
   this.Then(/^I pause the pipeline$/, function(callback) {
@@ -47,7 +44,6 @@ module.exports = function() {
 
   this.Then(/^the pipeline status should be "([^"]*)"$/, function(status, callback) {
     this.assert.equal(this.data.Pipeline.Status, status);
-    callback();
   });
 
   this.Then(/^I delete the pipeline$/, function(callback) {

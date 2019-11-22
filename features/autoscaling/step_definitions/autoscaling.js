@@ -1,7 +1,6 @@
 module.exports = function() {
-  this.Before('@autoscaling', function (callback) {
+  this.Before('@autoscaling', function () {
     this.service = new this.AWS.AutoScaling();
-    callback();
   });
 
   this.Given(/^I create a launch configuration with name "([^"]*)"$/, function(name, callback) {
@@ -21,7 +20,6 @@ module.exports = function() {
     this.assert.contains(this.data.LaunchConfigurations, function(configuration) {
       return configuration.LaunchConfigurationName === name;
     });
-    callback();
   });
 
   this.Then(/^I delete the launch configuration "([^"]*)"$/, function(name, callback) {

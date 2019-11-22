@@ -1,7 +1,6 @@
 module.exports = function() {
-  this.Before("@workspaces", function (callback) {
+  this.Before("@workspaces", function () {
     this.service = new this.AWS.WorkSpaces();
-    callback();
   });
 
   // Add step definitions

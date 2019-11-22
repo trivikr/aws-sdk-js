@@ -1,7 +1,6 @@
 module.exports = function() {
-  this.Before("@directconnect", function (callback) {
+  this.Before("@directconnect", function () {
     this.service = new this.AWS.DirectConnect();
-    callback();
   });
 
   this.Given(/^I create a Direct Connect connection with an invalid location$/, function(callback) {

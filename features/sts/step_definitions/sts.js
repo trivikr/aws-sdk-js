@@ -1,7 +1,6 @@
 module.exports = function() {
-  this.Before('@sts', function (callback) {
+  this.Before('@sts', function () {
     this.service = new this.AWS.STS();
-    callback();
   });
 
   this.Given(/^I get an STS session token with a duration of (\d+) seconds$/, function(duration, callback) {
@@ -11,7 +10,6 @@ module.exports = function() {
   this.Then(/^the result should contain an access key ID and secret access key$/, function(callback) {
     this.assert.compare(this.data.Credentials.AccessKeyId.length, '>', 0);
     this.assert.compare(this.data.Credentials.SecretAccessKey.length, '>', 0);
-    callback();
   });
 
   this.Given(/^I try to assume role with web identity$/, function(callback) {

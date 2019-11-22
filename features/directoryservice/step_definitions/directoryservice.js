@@ -1,7 +1,6 @@
 module.exports = function() {
-  this.Before("@directoryservice", function (callback) {
+  this.Before("@directoryservice", function () {
     this.service = new this.AWS.DirectoryService();
-    callback();
   });
 
   // Add step definitions

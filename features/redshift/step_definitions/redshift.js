@@ -1,7 +1,6 @@
 module.exports = function() {
-  this.Before("@redshift", function (callback) {
+  this.Before("@redshift", function () {
     this.service = new this.AWS.Redshift();
-    callback();
   });
 
   this.Given(/^I create a Redshift cluster parameter group with prefix name "([^"]*)"$/, function(prefix, callback) {

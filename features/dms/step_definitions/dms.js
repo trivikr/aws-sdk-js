@@ -1,7 +1,6 @@
 module.exports = function() {
-  this.Before("@dms", function (callback) {
+  this.Before("@dms", function () {
     this.service = new this.AWS.DMS();
-    callback();
   });
 
   // Add step definitions

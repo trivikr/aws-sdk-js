@@ -1,7 +1,6 @@
 module.exports = function() {
-  this.Before("@glacier", function (callback) {
+  this.Before("@glacier", function () {
     this.service = new this.AWS.Glacier();
-    callback();
   });
 
   this.Given(/^I have a Glacier vault$/, function(callback) {
@@ -23,13 +22,11 @@ module.exports = function() {
 
   this.Then(/^the result should contain the Glacier archive ID$/, function(callback) {
     this.archiveId = this.data.archiveId;
-    callback();
   });
 
   this.Then(/^the result should contain the same tree hash checksum$/, function(callback) {
     var hash = this.response.request.httpRequest.headers['x-amz-sha256-tree-hash'];
     this.assert.equal(this.data.checksum, hash);
-    callback();
   });
 
   this.When(/^I describe the Glacier vault$/, function(callback) {
@@ -63,7 +60,6 @@ module.exports = function() {
 
   this.Then(/^the result should contain the Glacier multi-part upload ID$/, function(callback) {
     this.uploadId = this.data.uploadId;
-    callback();
   });
 
   this.Then(/^I send the next part$/, function(callback) {

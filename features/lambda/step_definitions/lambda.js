@@ -1,7 +1,6 @@
 module.exports = function() {
-  this.Before("@lambda", function (callback) {
+  this.Before("@lambda", function () {
     this.service = new this.AWS.Lambda();
-    callback();
   });
 
   // Add step definitions

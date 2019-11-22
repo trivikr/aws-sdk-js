@@ -1,7 +1,6 @@
 module.exports = function() {
-  this.Before("@cloudtrail", function (callback) {
+  this.Before("@cloudtrail", function () {
     this.service = new this.AWS.CloudTrail();
-    callback();
   });
 
   this.Given(/^I describe trails$/, function(callback) {

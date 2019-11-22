@@ -1,7 +1,6 @@
 module.exports = function() {
-  this.Before("@elasticbeanstalk", function (callback) {
+  this.Before("@elasticbeanstalk", function () {
     this.service = new this.AWS.ElasticBeanstalk();
-    callback();
   });
 
   this.Given(/^I create an Elastic Beanstalk application with name prefix "([^"]*)"$/, function(prefix, callback) {
@@ -23,12 +22,10 @@ module.exports = function() {
 
   this.Then(/^the result should contain the Elastic Beanstalk application version$/, function(callback) {
     this.assert.deepEqual(this.data.Applications[0].Versions, [this.appVersion]);
-    callback();
   });
 
   this.Then(/^the result should contain the Elastic Beanstalk application name$/, function(callback) {
     this.assert.equal(this.data.Applications[0].ApplicationName, this.appName);
-    callback();
   });
 
   this.Then(/^I delete the Elastic Beanstalk application$/, function(callback) {

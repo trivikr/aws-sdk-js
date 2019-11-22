@@ -1,7 +1,6 @@
 module.exports = function() {
-  this.Before("@datapipeline", function (callback) {
+  this.Before("@datapipeline", function () {
     this.service = new this.AWS.DataPipeline();
-    callback();
   });
 
   var sortObjects = function sortObjects(objects) {

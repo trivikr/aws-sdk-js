@@ -93,19 +93,16 @@ module.exports = function () {
 
   this.Then(/^the streamed data should contain "([^"]*)"$/, function(data, callback) {
     this.assert.equal(this.result.replace('\n', ''), data);
-    callback();
   });
 
   this.Then(/^the streamed data content length should equal (\d+)$/, function(length, callback) {
     this.assert.equal(this.result.length, length);
-    callback();
   });
 
   this.When(/^I get a pre\-signed URL to GET the key "([^"]*)"$/, function(key, callback) {
     var world = this;
     this.s3.getSignedUrl('getObject', {Bucket: this.sharedBucket, Key: key}, function(err, url) {
       world.signedUrl = url;
-      callback();
     });
   });
 
@@ -125,7 +122,6 @@ module.exports = function () {
     if (body) params.Body = body;
     this.s3.getSignedUrl('putObject', params, function(err, url) {
       world.signedUrl = url;
-      callback();
     });
   });
 
@@ -175,12 +171,11 @@ module.exports = function () {
         body += '--' + world.postBoundary + '--\r\n';
         world.postBody = body;
         world.postAction = postData.url;
-        callback();
       });
     }
   );
 
-  this.Given(/^I POST the form$/, function (callback) {
+  this.Given(/^I POST the form$/, function () {
     var world = this;
     var options = require('url').parse(this.postAction);
     options.method = 'POST';
@@ -199,17 +194,14 @@ module.exports = function () {
 
   this.Then(/^the HTTP response should equal "([^"]*)"$/, function(data, callback) {
     this.assert.equal(this.data, data);
-    callback();
   });
 
   this.Then(/^the HTTP response should contain "([^"]*|)"$/, function(data, callback) {
     this.assert.match(this.data, data);
-    callback();
   });
 
   this.Given(/^I setup the listObjects request for the bucket$/, function(callback) {
     this.params = { Bucket: this.sharedBucket };
-    callback();
   });
 
   // progress events
@@ -225,17 +217,14 @@ module.exports = function () {
 
   this.Then(/^more than (\d+) "([^"]*)" event should fire$/, function(numEvents, eventName, callback) {
     this.assert.compare(this.progress.length, '>', numEvents);
-    callback();
   });
 
   this.Then(/^the "([^"]*)" value of the progress event should equal (\d+)MB$/, function(prop, mb, callback) {
     this.assert.equal(this.progress[0][prop], mb * 1024 * 1024);
-    callback();
   });
 
   this.Then(/^the "([^"]*)" value of the first progress event should be greater than (\d+) bytes$/, function(prop, bytes, callback) {
     this.assert.compare(this.progress[0][prop], '>', bytes);
-    callback();
   });
 
   this.When(/^I read the key "([^"]*)" with progress events$/, function(key, callback) {

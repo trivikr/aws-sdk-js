@@ -1,7 +1,6 @@
 module.exports = function() {
-  this.Before("@elasticache", function (callback) {
+  this.Before("@elasticache", function () {
     this.service = new this.AWS.ElastiCache();
-    callback();
   });
 
   this.Given(/^I create a cache parameter group with name prefix "([^"]*)"$/, function(prefix, callback) {
@@ -17,7 +16,6 @@ module.exports = function() {
   this.Given(/^the cache parameter group name is in the result$/, function(callback) {
     var name = this.data.CacheParameterGroup.CacheParameterGroupName;
     this.assert.equal(name, this.cacheGroupName);
-    callback();
   });
 
   this.Given(/^I describe the cache parameter groups$/, function(callback) {
@@ -28,7 +26,6 @@ module.exports = function() {
   this.Then(/^the cache parameter group should be described$/, function(callback) {
     var item = this.data.CacheParameterGroups[0];
     this.assert.equal(item.CacheParameterGroupName, this.cacheGroupName);
-    callback();
   });
 
   this.Then(/^I delete the cache parameter group$/, function(callback) {

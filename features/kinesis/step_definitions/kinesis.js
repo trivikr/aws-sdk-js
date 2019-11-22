@@ -1,7 +1,6 @@
 module.exports = function() {
-  this.Before("@kinesis", function (callback) {
+  this.Before("@kinesis", function () {
     this.service = new this.AWS.Kinesis();
-    callback();
   });
 
   this.Given(/^I try to describe a stream in Kinesis$/, function(callback) {

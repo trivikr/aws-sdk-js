@@ -1,7 +1,6 @@
 module.exports = function() {
-  this.Before("@inspector", function (callback) {
+  this.Before("@inspector", function () {
     this.service = new this.AWS.Inspector({region: 'us-west-2'});
-    callback();
   });
 
   // Add step definitions

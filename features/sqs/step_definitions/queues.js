@@ -25,7 +25,7 @@ module.exports = function () {
     }, { maxTime: 60 });
   });
 
-  this.Then(/^I delete the SQS queue$/, function (callback) {
+  this.Then(/^I delete the SQS queue$/, function () {
     var url = this.createdQueues.pop();
     this.request(null, 'deleteQueue', { QueueUrl: url }, callback);
   });

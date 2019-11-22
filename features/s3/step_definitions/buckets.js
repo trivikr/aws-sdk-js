@@ -2,12 +2,10 @@ module.exports = function() {
 
   this.Given(/^I am using the S3 "([^"]*)" region$/, function(region, callback) {
     this.s3 = new this.AWS.S3({region: region});
-    callback();
   });
 
   this.Given(/^I am using the S3 "([^"]*)" region with signatureVersion "([^"]*)"$/, function(region, signatureVersion, callback) {
     this.s3 = new this.AWS.S3({region: region, signatureVersion: signatureVersion});
-    callback();
   });
 
   this.When(/^I create a bucket with the location constraint "([^"]*)"$/, function(location, callback) {
@@ -31,7 +29,6 @@ module.exports = function() {
     self.s3.getBucketLocation({Bucket: self.bucket}, function(err, data) {
       if (err) callback.fail(err);
       self.assert.equal(data.LocationConstraint, loc);
-      callback();
     });
   });
 
@@ -57,12 +54,10 @@ module.exports = function() {
 
   this.Then(/^the lifecycle configuration should have transition days of (\d+)$/, function(days, callback) {
     this.assert.equal(this.data.Rules[0].Transition.Days, 0);
-    callback();
   });
 
   this.Then(/^the lifecycle configuration should have transition storage class of "([^"]*)"$/, function(value, callback) {
     this.assert.equal(this.data.Rules[0].Transition.StorageClass, value);
-    callback();
   });
 
   this.When(/^I put a bucket CORS configuration$/, function(callback) {
@@ -87,27 +82,22 @@ module.exports = function() {
 
   this.Then(/^the AllowedMethods list should inclue "([^"]*)"$/, function(value, callback) {
     this.assert.equal(this.data.CORSRules[0].AllowedMethods.sort().join(' '), 'DELETE POST PUT');
-    callback();
   });
 
   this.Then(/^the AllowedOrigin value should equal "([^"]*)"$/, function(value, callback) {
     this.assert.equal(this.data.CORSRules[0].AllowedOrigins[0], value);
-    callback();
   });
 
   this.Then(/^the AllowedHeader value should equal "([^"]*)"$/, function(value, callback) {
     this.assert.equal(this.data.CORSRules[0].AllowedHeaders[0], value);
-    callback();
   });
 
   this.Then(/^the ExposeHeader value should equal "([^"]*)"$/, function(value, callback) {
     this.assert.equal(this.data.CORSRules[0].ExposeHeaders[0], value);
-    callback();
   });
 
   this.Then(/^the MaxAgeSeconds value should equal (\d+)$/, function(value, callback) {
     this.assert.equal(this.data.CORSRules[0].MaxAgeSeconds, parseInt(value));
-    callback();
   });
 
   this.When(/^I put a bucket tag with key "([^"]*)" and value "([^"]*)"$/, function(key, value, callback) {
@@ -130,7 +120,6 @@ module.exports = function() {
   this.Then(/^the first tag in the tag set should have key and value "([^"]*)", "([^"]*)"$/, function(key, value, callback) {
     this.assert.equal(this.data.TagSet[0].Key, key);
     this.assert.equal(this.data.TagSet[0].Value, value);
-    callback();
   });
 
   this.When(/^I create a bucket with a DNS compatible name that contains a dot$/, function(callback) {
@@ -145,19 +134,16 @@ module.exports = function() {
 
   this.Given(/^I force path style requests$/, function(callback) {
     this.s3 = new this.AWS.S3({s3ForcePathStyle: true});
-    callback();
   });
 
   this.Then(/^the bucket name should be in the request path$/, function(callback) {
     var path = this.response.request.httpRequest.path.split('/');
     this.assert.equal(path[1], this.bucket);
-    callback();
   });
 
   this.Then(/^the bucket name should not be in the request host$/, function(callback) {
     var host = this.response.request.httpRequest.endpoint.host;
     this.assert.compare(host.indexOf(this.bucket), '<', 0);
-    callback();
   });
 
   this.When(/^I put "([^"]*)" to the key "([^"]*)" in the bucket$/, function(data, key, next) {

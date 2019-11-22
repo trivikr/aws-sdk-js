@@ -1,7 +1,6 @@
 module.exports = function() {
-  this.Before("@cloudwatchevents", function (callback) {
+  this.Before("@cloudwatchevents", function () {
     this.service = new this.AWS.CloudWatchEvents();
-    callback();
   });
 
   // Add step definitions

@@ -20,7 +20,6 @@ module.exports = function() {
           callback(err);
         });
       } else {
-        callback();
       }
     } catch (fileErr) {
       callback(fileErr);
@@ -95,7 +94,6 @@ module.exports = function() {
         });
         s3.deleteObjects(params, callback);
       } else {
-        callback();
       }
     });
   };

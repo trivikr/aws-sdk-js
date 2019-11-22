@@ -46,9 +46,8 @@ module.exports = function() {
     Enabled: false
   };
 
-  this.Before("@cloudfront", function (callback) {
+  this.Before("@cloudfront", function () {
     this.service = new this.AWS.CloudFront();
     this.cfCreateParams = createParams;
-    callback();
   });
 };

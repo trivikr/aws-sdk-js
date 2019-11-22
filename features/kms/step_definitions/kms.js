@@ -1,7 +1,6 @@
 module.exports = function() {
-  this.Before("@kms", function (callback) {
+  this.Before("@kms", function () {
     this.service = new this.AWS.KMS();
-    callback();
   });
 
   // Add step definitions

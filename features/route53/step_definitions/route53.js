@@ -1,7 +1,6 @@
 module.exports = function() {
-  this.Before("@route53", function (callback) {
+  this.Before("@route53", function () {
     this.service = new this.AWS.Route53();
-    callback();
   });
 
   this.When(/^I create a Route53 hosted zone with name prefix "([^"]*)"$/, function(prefix, callback) {
@@ -18,17 +17,14 @@ module.exports = function() {
 
   this.Then(/^the result should contain the hosted zone ID$/, function(callback) {
     this.hostedZoneId = this.data.HostedZone.Id;
-    callback();
   });
 
   this.Then(/^the result should contain the change ID$/, function(callback) {
     this.changeInfoId = this.data.ChangeInfo.Id;
-    callback();
   });
 
   this.Then(/^the result should contain the hosted zone name$/, function(callback) {
     this.assert.equal(this.data.HostedZone.Name, this.zoneName + '.');
-    callback();
   });
 
   this.When(/^I get information about the Route53 change ID$/, function(callback) {
@@ -37,7 +33,6 @@ module.exports = function() {
 
   this.Then(/^the change status should be PENDING or INSYNC$/, function(callback) {
     this.assert.match(this.data.ChangeInfo.Status, /^(PENDING|INSYNC)$/);
-    callback();
   });
 
   this.When(/^I get information about the Route53 hosted zone ID$/, function(callback) {
@@ -47,7 +42,6 @@ module.exports = function() {
   this.Then(/^the result should contain multiple nameservers$/, function(callback) {
     this.assert.compare(this.data.DelegationSet.NameServers.length, '>=', 0);
     this.assert.equal(typeof this.data.DelegationSet.NameServers[0], 'string');
-    callback();
   });
 
   this.Then(/^I delete the Route53 hosted zone$/, function(callback) {
@@ -68,12 +62,10 @@ module.exports = function() {
 
   this.Then(/^the result should contain health check information$/, function(callback) {
     this.healthCheckInfo = this.data.HealthCheck;
-    callback();
   });
 
   this.Then(/^the result should contain the health check ID$/, function(callback) {
     this.healthCheckId = this.data.HealthCheck.Id;
-    callback();
   });
 
   this.When(/^I get information about the health check ID$/, function(callback) {
@@ -83,7 +75,6 @@ module.exports = function() {
 
   this.Then(/^the result should contain the previous health check information$/, function(callback) {
     this.assert.deepEqual(this.data.HealthCheck, this.healthCheckInfo);
-    callback();
   });
 
   this.Then(/^I delete the Route53 TCP health check$/, function(callback) {

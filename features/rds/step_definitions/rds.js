@@ -1,9 +1,8 @@
 var jmespath = require('jmespath');
 
 module.exports = function() {
-  this.Before("@rds", function (callback) {
+  this.Before("@rds", function () {
     this.service = new this.AWS.RDS();
-    callback();
   });
 
   this.Given(/^I create a RDS security group with prefix name "([^"]*)"$/, function(prefix, callback) {
@@ -22,7 +21,6 @@ module.exports = function() {
       }
     });
     this.assert.ok(containDefault === true, `No ${path} has member key ${key} of the value ${value}`);
-    callback();
   });
 
   this.Given(/^I paginate the "([^"]*)" operation asynchronously with limit (\d+)$/, function (operation, limit, callback) {
@@ -46,7 +44,6 @@ module.exports = function() {
         if (err) callback.fail(err);
         else if (data === null || world.numPages === maxPages) {
           world.finishedPagination = true;
-          callback();
           return false;
         } else {
           if (data[marker]) world.numMarkers++;
@@ -59,8 +56,7 @@ module.exports = function() {
     });
   });
 
-  this.Then(/^I should be able to asynchronously paginate all pages$/, function (callback) {
+  this.Then(/^I should be able to asynchronously paginate all pages$/, function () {
     this.assert.equal(this.finishedPagination, true);
-    callback();
   });
 };

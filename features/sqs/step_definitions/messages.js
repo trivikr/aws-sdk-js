@@ -6,12 +6,10 @@ module.exports = function () {
 
   this.Then(/^the result should include a message ID$/, function(callback) {
     this.assert.compare(this.data.MessageId.length, '>', 0);
-    callback();
   });
 
   this.Then(/^the result should have an MD5 digest of "([^"]*)"$/, function(digest, callback) {
     this.assert.equal(this.data.MD5OfMessageBody, digest);
-    callback();
   });
 
   this.Then(/^I should eventually be able to receive "([^"]*)" from the queue$/, function(message, callback) {

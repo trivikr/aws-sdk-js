@@ -1,7 +1,6 @@
 module.exports = function() {
-  this.Before("@elb", function (callback) {
+  this.Before("@elb", function () {
     this.service = new this.AWS.ELB();
-    callback();
   });
 
   this.Given(/^I create a load balancer with name prefix "([^"]*)"$/, function(prefix, callback) {
@@ -23,7 +22,6 @@ module.exports = function() {
   this.Then(/^the load balancer should be in the list$/, function(callback) {
     var name = this.data.LoadBalancerDescriptions[0].LoadBalancerName;
     this.assert.equal(name, this.loadBalancerName);
-    callback();
   });
 
   this.Then(/^I delete the load balancer$/, function(callback) {

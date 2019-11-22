@@ -1,7 +1,6 @@
 module.exports = function() {
-  this.Before("@ses", function (callback) {
+  this.Before("@ses", function () {
     this.service = new this.AWS.SES();
-    callback();
   });
 
   this.When(/^I check quota$/, function(next) {

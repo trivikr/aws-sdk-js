@@ -49,7 +49,6 @@ module.exports = function() {
     this.service.listTables(function(err, data) {
       for (var i = 0; i < data.TableNames.length; i++) {
         if (data.TableNames[i] == world.tableName) {
-          callback();
           return;
         }
       }
@@ -113,7 +112,6 @@ module.exports = function() {
   this.Then(/^the request should( not)? be retried$/, function(retry, callback) {
     if (retry && this.response.retryCount > 0) callback.fail('Request was incorrectly retried');
     if (!retry && this.response.retryCount == 0) callback.fail('Request was incorrectly retried');
-    callback();
   });
 
   this.Given(/^all of my requests are corrupted with CRC checking ON$/, function(callback) {
@@ -126,20 +124,17 @@ module.exports = function() {
     req.on('complete', function(resp) {
       world.error = resp.error;
       world.response = resp;
-      callback();
     });
     req.send();
   });
 
   this.When(/^the request is retried the maximum number of times$/, function(callback) {
     if (this.response.retryCount != 2) callback.fail('Incorrect retry count');
-    callback();
   });
 
   this.Then(/^the request should( not)? fail with a CRC checking error$/, function(failed, callback) {
     if (failed && this.error) callback.fail(this.error);
     if (!failed && !this.error) callback.fail('Did not fail when should have');
-    callback();
   });
 
   this.Given(/^I try to delete an item with key "([^"]*)" from table "([^"]*)"$/, function(key, table, callback) {

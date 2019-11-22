@@ -7,7 +7,6 @@ module.exports = function () {
     self.s3.upload(params, function (err, data) {
       self.error = err;
       self.data = data;
-      callback();
     });
   });
 
@@ -23,14 +22,12 @@ module.exports = function () {
     self.s3.upload(params, function (err, data) {
       self.error = err;
       self.data = data;
-      callback();
     });
   });
 
-  this.Then(/^the multipart upload should succeed$/, function (callback) {
+  this.Then(/^the multipart upload should succeed$/, function () {
     this.assert.equal(this.error, null);
     this.assert.equal(typeof this.data.Location, 'string');
-    callback();
   });
 
   this.When(/^I use S3 managed upload to upload(?: a| an) (empty|small|large) stream to the key "([^"]*)"$/, function (size, key, callback) {
@@ -47,18 +44,15 @@ module.exports = function () {
     self.s3.upload(params).on('httpUploadProgress', progress).send(function (err, data) {
       self.error = err;
       self.data = data;
-      callback();
     });
   });
 
-  this.Then(/^I should get progress events$/, function (callback) {
+  this.Then(/^I should get progress events$/, function () {
     this.assert.compare(this.progressEvents.length, '>', 0);
-    callback();
   });
 
   this.Then(/^the ContentLength should equal (\d+)$/, function (val, callback) {
     this.assert.equal(this.data.ContentLength, val);
-    callback();
   });
 
   this.When(/^I use S3 managed upload to upload some (\d+MB) buffer to the key "([^"]*)"$/, function(size, key, callback) {
@@ -83,7 +77,6 @@ module.exports = function () {
       self.error = err;
       self.data = data;
     });
-    callback();
   });
 
   this.When(/^I use S3 managed upload to partially upload some (\d+MB) buffer to the key "([^"]*)"$/, function(size, key, callback) {
@@ -113,18 +106,15 @@ module.exports = function () {
     managedUpload.on('httpUploadProgress', progress).send(function(err, data) {
       self.error = err;
       self.data = data;
-      callback();
     });
   });
 
   this.When(/^I abort the upload$/, function(callback) {
     this.managedUpload.abort();
-    callback();
   });
 
   this.Then(/^I receive a "([^"]*)" error$/, function(errName, callback) {
     this.assert.equal(this.error.name, errName);
-    callback();
   });
 
   this.When(/^I resume the upload$/, function(callback) {
@@ -132,12 +122,10 @@ module.exports = function () {
     self.managedUpload.send(function(err, data) {
       self.error = err;
       self.data = data;
-      callback();
     });
   });
 
   this.Then(/^uploadPart should have been called (\d+) times$/, function(count, callback) {
     this.assert.equal(this.progressEvents.length, count);
-    callback();
   });
 };

@@ -1,7 +1,6 @@
 module.exports = function() {
-  this.Before("@mobileanalytics", function (callback) {
+  this.Before("@mobileanalytics", function () {
     this.service = new this.AWS.MobileAnalytics();
-    callback();
   });
 
   // Add step definitions

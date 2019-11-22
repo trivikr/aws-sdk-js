@@ -1,7 +1,6 @@
 module.exports = function() {
-  this.Before("@storagegateway", function (callback) {
+  this.Before("@storagegateway", function () {
     this.service = new this.AWS.StorageGateway();
-    callback();
   });
 
   this.When(/^I try to activate a Storage Gateway$/, function(callback) {

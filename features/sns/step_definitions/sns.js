@@ -1,7 +1,6 @@
 module.exports = function() {
-  this.Before("@sns", function (callback) {
+  this.Before("@sns", function () {
     this.service = new this.AWS.SNS();
-    callback();
   });
 
   this.Given(/^I create an SNS topic with name "([^"]*)"$/, function(name, callback) {
@@ -20,7 +19,6 @@ module.exports = function() {
     this.assert.contains(this.data.Topics, function(topic) {
       return topic.TopicArn === arn;
     });
-    callback();
   });
 
   this.Then(/^I delete the SNS topic$/, function(callback) {

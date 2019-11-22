@@ -1,7 +1,6 @@
 module.exports = function() {
-  this.Before("@gamelift", function (callback) {
+  this.Before("@gamelift", function () {
     this.service = new this.AWS.GameLift();
-    callback();
   });
 
   // Add step definitions

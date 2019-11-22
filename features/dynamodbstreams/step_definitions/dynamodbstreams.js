@@ -1,7 +1,6 @@
 module.exports = function() {
-  this.Before("@dynamodbstreams", function (callback) {
+  this.Before("@dynamodbstreams", function () {
     this.service = new this.AWS.DynamoDBStreams();
-    callback();
   });
 
   // Add step definitions

@@ -1,7 +1,6 @@
 module.exports = function() {
-  this.Before("@cloudwatch", function (callback) {
+  this.Before("@cloudwatch", function () {
     this.service = new this.AWS.CloudWatch();
-    callback();
   });
 
   this.Given(/^I create a CloudWatch alarm with (prefix|name) "([^"]*)"$/, function(prefix, name, callback) {
@@ -38,7 +37,6 @@ module.exports = function() {
     this.assert.contains(this.data.MetricAlarms, function(alarm) {
       return alarm.AlarmName === name;
     });
-    callback();
   });
 
   this.Then(/^I delete the CloudWatch alarm$/, function(callback) {

@@ -1,7 +1,6 @@
 module.exports = function() {
-  this.Before("@machinelearning", function (callback) {
+  this.Before("@machinelearning", function () {
     this.service = new this.AWS.MachineLearning();
-    callback();
   });
 
   // Add step definitions

@@ -1,7 +1,6 @@
 module.exports = function() {
-  this.Before("@cloudformation", function (callback) {
+  this.Before("@cloudformation", function () {
     this.service = new this.AWS.CloudFormation();
-    callback();
   });
 
   this.Given(/^I create a CloudFormation stack with name prefix "([^"]*)"$/, function(prefix, callback) {

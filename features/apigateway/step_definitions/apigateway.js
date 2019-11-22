@@ -1,7 +1,6 @@
 module.exports = function() {
-  this.Before("@apigateway", function (callback) {
+  this.Before("@apigateway", function () {
     this.service = new this.AWS.APIGateway();
-    callback();
   });
 
   // Add step definitions

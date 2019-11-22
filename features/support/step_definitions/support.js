@@ -1,7 +1,6 @@
 module.exports = function() {
-  this.Before("@support", function (callback) {
+  this.Before("@support", function () {
     this.service = new this.AWS.Support();
-    callback();
   });
 
   this.Given(/^I describe Support services$/, function(callback) {
@@ -12,14 +11,12 @@ module.exports = function() {
     this.assert.contains(this.data.services, function (svc) {
       return svc.code == code;
     });
-    callback();
   });
 
   this.Then(/^the Supported services list should contain a service with name "([^"]*)"$/, function(name, callback) {
     this.assert.contains(this.data.services, function (svc) {
       return svc.name == name;
     });
-    callback();
   });
 
   this.Given(/^I create a case with an invalid category$/, function(callback) {

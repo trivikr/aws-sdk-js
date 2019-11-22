@@ -1,7 +1,6 @@
 module.exports = function() {
-  this.Before("@ec2", function (callback) {
+  this.Before("@ec2", function () {
     this.service = new this.AWS.EC2();
-    callback();
   });
 
   this.Given(/^I describe EC2 regions "([^"]*)"$/, function(regions, callback) {
@@ -13,14 +12,13 @@ module.exports = function() {
     this.assert.contains(this.data.Regions, function(region) {
       return region.Endpoint === endpoint;
     });
-    callback();
   });
 
   this.Given(/^I describe the EC2 instance "([^"]*)"$/, function(instanceId, callback) {
     this.request(null, 'describeInstances', {InstanceIds: [instanceId]}, callback, false);
   });
 
-  this.Given(/^I attempt to copy an encrypted snapshot across regions$/, function (callback) {
+  this.Given(/^I attempt to copy an encrypted snapshot across regions$/, function () {
     var self = this;
     var volId, srcSnapId, dstSnapId, params;
     var sourceRegion = 'us-west-2';
@@ -51,7 +49,6 @@ module.exports = function() {
             dstEc2.copySnapshot(params, function(err, data) {
               if (data) dstSnapId = data.SnapshotId;
               self.success = true;
-              callback();
               teardown();
             });
           }, 5000);
@@ -60,8 +57,7 @@ module.exports = function() {
     });
   });
 
-  this.Then(/^the copy snapshot attempt should be successful$/, function (callback) {
+  this.Then(/^the copy snapshot attempt should be successful$/, function () {
     this.assert.equal(this.success, true);
-    callback();
   });
 };
