@@ -1,5 +1,5 @@
 module.exports = function() {
-  this.Before("@sns", function () {
+  this.Before("@sns", function (callback) {
     this.service = new this.AWS.SNS();
   });
 

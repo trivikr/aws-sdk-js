@@ -1,5 +1,5 @@
 module.exports = function() {
-  this.Before("@cloudsearch", function () {
+  this.Before("@cloudsearch", function (callback) {
     this.service = new this.AWS.CloudSearch();
   });
 

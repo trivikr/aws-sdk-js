@@ -25,7 +25,7 @@ module.exports = function () {
     });
   });
 
-  this.Then(/^the multipart upload should succeed$/, function () {
+  this.Then(/^the multipart upload should succeed$/, function (callback) {
     this.assert.equal(this.error, null);
     this.assert.equal(typeof this.data.Location, 'string');
   });
@@ -47,7 +47,7 @@ module.exports = function () {
     });
   });
 
-  this.Then(/^I should get progress events$/, function () {
+  this.Then(/^I should get progress events$/, function (callback) {
     this.assert.compare(this.progressEvents.length, '>', 0);
   });
 

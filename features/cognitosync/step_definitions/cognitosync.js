@@ -1,9 +1,9 @@
 module.exports = function() {
-  this.Before("@cognitosync", function () {
+  this.Before("@cognitosync", function (callback) {
     this.service = new this.AWS.CognitoSync();
   });
 
-  this.Given(/^I list Cognito identity pool usage$/, function () {
+  this.Given(/^I list Cognito identity pool usage$/, function (callback) {
     this.request(null, 'listIdentityPoolUsage', {}, callback);
   });
 

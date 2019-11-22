@@ -1,5 +1,5 @@
 module.exports = function() {
-  this.Before("@elb", function () {
+  this.Before("@elb", function (callback) {
     this.service = new this.AWS.ELB();
   });
 

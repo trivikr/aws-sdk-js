@@ -175,7 +175,7 @@ module.exports = function () {
     }
   );
 
-  this.Given(/^I POST the form$/, function () {
+  this.Given(/^I POST the form$/, function (callback) {
     var world = this;
     var options = require('url').parse(this.postAction);
     options.method = 'POST';

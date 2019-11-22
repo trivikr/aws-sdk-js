@@ -1,5 +1,5 @@
 module.exports = function() {
-  this.Before("@cloudtrail", function () {
+  this.Before("@cloudtrail", function (callback) {
     this.service = new this.AWS.CloudTrail();
   });
 

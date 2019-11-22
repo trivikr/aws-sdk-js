@@ -1,7 +1,7 @@
 var jmespath = require('jmespath');
 
 module.exports = function() {
-  this.Before("@rds", function () {
+  this.Before("@rds", function (callback) {
     this.service = new this.AWS.RDS();
   });
 
@@ -56,7 +56,7 @@ module.exports = function() {
     });
   });
 
-  this.Then(/^I should be able to asynchronously paginate all pages$/, function () {
+  this.Then(/^I should be able to asynchronously paginate all pages$/, function (callback) {
     this.assert.equal(this.finishedPagination, true);
   });
 };
