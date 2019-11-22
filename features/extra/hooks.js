@@ -2,10 +2,10 @@ var util = require('util');
 var jmespath = require('jmespath');
 
 module.exports = function () {
+  this.setDefaultTimeout(60 * 1000);
   this.World = require('./world.js').World;
 
   this.Before(function() {
-    this.setDefaultTimeout(60 * 1000);
     this.params = {};
   });
 
