@@ -1,10 +1,10 @@
 module.exports = function() {
-  this.Before("@cognitoidentity", function (callback) {
+  this.Before('@cognitoidentity', function (callback) {
     this.service = new this.AWS.CognitoIdentity();
   });
 
   this.Given(/^I create a Cognito identity pool with prefix "([^"]*)"$/, function (prefix, callback) {
-    var expectError = prefix === "" ? false : undefined;
+    var expectError = prefix === '' ? false : undefined;
     var params = {IdentityPoolName: this.uniqueName(prefix, ''), AllowUnauthenticatedIdentities: true};
     this.request(null, 'createIdentityPool', params, callback, expectError);
   });

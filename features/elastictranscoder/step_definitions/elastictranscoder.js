@@ -1,5 +1,5 @@
 module.exports = function() {
-  this.Before("@elastictranscoder", function (callback) {
+  this.Before('@elastictranscoder', function (callback) {
     this.iam = new this.AWS.IAM();
     this.s3 = new this.AWS.S3();
     this.service = new this.AWS.ElasticTranscoder();
@@ -12,13 +12,13 @@ module.exports = function() {
       InputBucket: this.bucket,
       OutputBucket: this.bucket,
       Role: this.iamRoleArn,
-      Notifications: {"Progressing":"","Completed":"","Warning":"","Error":""}
+      Notifications: {'Progressing':'','Completed':'','Warning':'','Error':''}
     };
 
     var world = this;
     var next = function() {
       if (world.data) world.pipelineId = world.data.Pipeline.Id;
-    }
+    };
 
     this.request(null, 'createPipeline', params, next, false);
   });

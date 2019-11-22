@@ -1,5 +1,5 @@
 module.exports = function() {
-  this.Before("@route53domains", function (callback) {
+  this.Before('@route53domains', function (callback) {
     this.service = new this.AWS.Route53Domains();
   });
 

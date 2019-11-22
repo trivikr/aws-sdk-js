@@ -1,10 +1,10 @@
 module.exports = function() {
-  this.Before("@cloudwatchlogs", function (callback) {
+  this.Before('@cloudwatchlogs', function (callback) {
     this.service = new this.AWS.CloudWatchLogs();
   });
 
   this.Given(/^I create a CloudWatch logGroup with prefix "([^"]*)"$/, function (prefix, callback) {
-    var expectErr = prefix === "" ? false : undefined;
+    var expectErr = prefix === '' ? false : undefined;
     this.logGroupName = this.uniqueName(prefix);
     this.request(null, 'createLogGroup', {logGroupName: this.logGroupName}, callback, expectErr);
   });

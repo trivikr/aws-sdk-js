@@ -1,5 +1,5 @@
 module.exports = function() {
-  this.Before("@glacier", function (callback) {
+  this.Before('@glacier', function (callback) {
     this.service = new this.AWS.Glacier();
   });
 
@@ -14,7 +14,7 @@ module.exports = function() {
     data.fill('0');
     var params = {vaultName: this.vaultName, body: data};
     if (invalid) {
-      if (invalid.match("invalid")) params.checksum = '000';
+      if (invalid.match('invalid')) params.checksum = '000';
       else params.checksum = '00000000000000000000000000000000';
     }
     this.request(null, 'uploadArchive', params, callback, false);

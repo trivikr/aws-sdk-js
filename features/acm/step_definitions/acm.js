@@ -1,5 +1,5 @@
 module.exports = function() {
-  this.Before("@acm", function () {
+  this.Before('@acm', function () {
     this.service = new this.AWS.ACM();
   });
 

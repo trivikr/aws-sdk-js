@@ -1,5 +1,5 @@
 module.exports = function() {
-  this.Before("@ses", function (callback) {
+  this.Before('@ses', function (callback) {
     this.service = new this.AWS.SES();
   });
 
@@ -8,8 +8,8 @@ module.exports = function() {
   });
 
   this.Then(/^the result should include (\S+) "([^"]*)"$/, function(type, attr, next) {
-    if (this.data[attr] === undefined) next.fail("Missing " + attr);
-    if (typeof this.data[attr] !== type) next.fail("Incorrect type " + attr);
+    if (this.data[attr] === undefined) next.fail('Missing ' + attr);
+    if (typeof this.data[attr] !== type) next.fail('Incorrect type ' + attr);
     next();
   });
 

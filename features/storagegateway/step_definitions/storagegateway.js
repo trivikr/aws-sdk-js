@@ -1,5 +1,5 @@
 module.exports = function() {
-  this.Before("@storagegateway", function (callback) {
+  this.Before('@storagegateway', function (callback) {
     this.service = new this.AWS.StorageGateway();
   });
 

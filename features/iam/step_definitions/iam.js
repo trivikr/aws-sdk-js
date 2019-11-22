@@ -1,5 +1,5 @@
 module.exports = function() {
-  this.Before("@iam", function (callback) {
+  this.Before('@iam', function (callback) {
     this.iam = new this.AWS.IAM();
   });
 
@@ -44,7 +44,7 @@ module.exports = function() {
       AssumeRolePolicyDocument: assumeRolePolicyDocument};
     var next = function() {
       world.iamRoleArn = world.data.Role.Arn;
-    }
+    };
     next.fail = callback.fail;
 
     this.request('iam', 'createRole', params, next);

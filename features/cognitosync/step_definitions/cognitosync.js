@@ -1,5 +1,5 @@
 module.exports = function() {
-  this.Before("@cognitosync", function (callback) {
+  this.Before('@cognitosync', function (callback) {
     this.service = new this.AWS.CognitoSync();
   });
 

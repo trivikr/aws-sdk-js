@@ -1,5 +1,5 @@
 module.exports = function() {
-  this.Before("@support", function (callback) {
+  this.Before('@support', function (callback) {
     this.service = new this.AWS.Support();
   });
 
@@ -21,10 +21,10 @@ module.exports = function() {
 
   this.Given(/^I create a case with an invalid category$/, function(callback) {
     var params = {
-      subject: "Subject",
-      serviceCode: "INVALID-CODE",
-      categoryCode: "INVALID-CATEGORY",
-      communicationBody: "Communication"
+      subject: 'Subject',
+      serviceCode: 'INVALID-CODE',
+      categoryCode: 'INVALID-CATEGORY',
+      communicationBody: 'Communication'
     };
 
     this.request(null, 'createCase', params, callback, false);

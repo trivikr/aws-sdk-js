@@ -1,5 +1,5 @@
 module.exports = function() {
-  this.Before("@route53", function (callback) {
+  this.Before('@route53', function (callback) {
     this.service = new this.AWS.Route53();
   });
 
@@ -56,7 +56,7 @@ module.exports = function() {
         Port: 80,
         Type: 'TCP'
       }
-    }
+    };
     this.request(null, 'createHealthCheck', params, callback);
   });
 
