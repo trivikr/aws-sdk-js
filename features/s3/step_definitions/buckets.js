@@ -27,7 +27,7 @@ module.exports = function() {
   this.Then(/^the bucket should have a location constraint of "([^"]*)"$/, function(loc, callback) {
     var self = this;
     self.s3.getBucketLocation({Bucket: self.bucket}, function(err, data) {
-      if (err) callback.fail(err);
+      if (err) callback(err);
       self.assert.equal(data.LocationConstraint, loc);
     });
   });

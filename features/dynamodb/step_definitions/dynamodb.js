@@ -35,7 +35,7 @@ module.exports = function() {
 
     db.createTable(params, function(err, data) {
       if (err) {
-        callback.fail(err);
+        callback(err);
         return;
       }
       params = { TableName: world.tableName };
@@ -103,15 +103,15 @@ module.exports = function() {
     req.on('complete', function(resp) {
       world.error = resp.error;
       world.response = resp;
-      if (resp.error) callback.fail(resp.error);
+      if (resp.error) callback(resp.error);
       else callback();
     });
     req.send();
   });
 
   this.Then(/^the request should( not)? be retried$/, function(retry, callback) {
-    if (retry && this.response.retryCount > 0) callback.fail('Request was incorrectly retried');
-    if (!retry && this.response.retryCount == 0) callback.fail('Request was incorrectly retried');
+    if (retry && this.response.retryCount > 0) callback('Request was incorrectly retried');
+    if (!retry && this.response.retryCount == 0) callback('Request was incorrectly retried');
   });
 
   this.Given(/^all of my requests are corrupted with CRC checking ON$/, function(callback) {
@@ -129,12 +129,12 @@ module.exports = function() {
   });
 
   this.When(/^the request is retried the maximum number of times$/, function(callback) {
-    if (this.response.retryCount != 2) callback.fail('Incorrect retry count');
+    if (this.response.retryCount != 2) callback('Incorrect retry count');
   });
 
   this.Then(/^the request should( not)? fail with a CRC checking error$/, function(failed, callback) {
-    if (failed && this.error) callback.fail(this.error);
-    if (!failed && !this.error) callback.fail('Did not fail when should have');
+    if (failed && this.error) callback(this.error);
+    if (!failed && !this.error) callback('Did not fail when should have');
   });
 
   this.Given(/^I try to delete an item with key "([^"]*)" from table "([^"]*)"$/, function(key, table, callback) {

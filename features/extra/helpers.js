@@ -50,7 +50,7 @@ module.exports = {
           block.call(self, retry);
         }, delay);
       } else {
-        callback.fail(err || new Error('Eventually block timed out'));
+        callback(err || new Error('Eventually block timed out'));
       }
     };
 
