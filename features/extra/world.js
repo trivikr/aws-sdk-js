@@ -8,9 +8,8 @@ try {
   process.env['CONFIGURED_REGION'] = world.AWS.config.region || new world.AWS.Config().region;
 }
 
-var WorldConstructor = function WorldConstructor(callback) {
-  callback(world);
+var WorldConstructor = function WorldConstructor() {
+  return world;
 };
 
 exports.World = WorldConstructor;
-exports.WorldInstance = world;
