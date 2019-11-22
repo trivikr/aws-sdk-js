@@ -1,5 +1,5 @@
 module.exports = function() {
-  this.Before("@ec2", function (callback) {
+  this.Before({tags: ["@ec2"]}, function (callback) {
     this.service = new this.AWS.EC2();
     callback();
   });

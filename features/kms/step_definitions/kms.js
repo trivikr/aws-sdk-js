@@ -1,5 +1,5 @@
 module.exports = function() {
-  this.Before("@kms", function (callback) {
+  this.Before({tags: ["@kms"]}, function (callback) {
     this.service = new this.AWS.KMS();
     callback();
   });

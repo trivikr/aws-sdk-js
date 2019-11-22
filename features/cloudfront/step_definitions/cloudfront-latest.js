@@ -46,7 +46,7 @@ module.exports = function() {
     Enabled: false
   };
 
-  this.Before("@cloudfront", function (callback) {
+  this.Before({tags: ["@cloudfront"]}, function (callback) {
     this.service = new this.AWS.CloudFront();
     this.cfCreateParams = createParams;
     callback();

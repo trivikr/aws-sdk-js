@@ -1,5 +1,5 @@
 module.exports = function() {
-  this.Before("@cloudwatchlogs", function (callback) {
+  this.Before({tags: ["@cloudwatchlogs"]}, function (callback) {
     this.service = new this.AWS.CloudWatchLogs();
     callback();
   });

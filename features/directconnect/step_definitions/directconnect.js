@@ -1,5 +1,5 @@
 module.exports = function() {
-  this.Before("@directconnect", function (callback) {
+  this.Before({tags: ["@directconnect"]}, function (callback) {
     this.service = new this.AWS.DirectConnect();
     callback();
   });

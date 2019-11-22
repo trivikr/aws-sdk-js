@@ -1,5 +1,5 @@
 module.exports = function() {
-  this.Before("@cognitoidentity", function (callback) {
+  this.Before({tags: ["@cognitoidentity"]}, function (callback) {
     this.service = new this.AWS.CognitoIdentity();
     callback();
   });

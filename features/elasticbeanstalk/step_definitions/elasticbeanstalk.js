@@ -1,5 +1,5 @@
 module.exports = function() {
-  this.Before("@elasticbeanstalk", function (callback) {
+  this.Before({tags: ["@elasticbeanstalk"]}, function (callback) {
     this.service = new this.AWS.ElasticBeanstalk();
     callback();
   });

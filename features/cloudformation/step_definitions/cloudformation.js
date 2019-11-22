@@ -1,5 +1,5 @@
 module.exports = function() {
-  this.Before("@cloudformation", function (callback) {
+  this.Before({tags: ["@cloudformation"]}, function (callback) {
     this.service = new this.AWS.CloudFormation();
     callback();
   });

@@ -1,5 +1,5 @@
 module.exports = function() {
-  this.Before("@datapipeline", function (callback) {
+  this.Before({tags: ["@datapipeline"]}, function (callback) {
     this.service = new this.AWS.DataPipeline();
     callback();
   });

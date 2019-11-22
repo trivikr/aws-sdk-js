@@ -1,5 +1,5 @@
 module.exports = function() {
-  this.Before("@iam", function (callback) {
+  this.Before({tags: ["@iam"]}, function (callback) {
     this.iam = new this.AWS.IAM();
     callback();
   });

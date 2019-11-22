@@ -28,7 +28,7 @@ Feature: #{@api['service_full_name']}
   def step_definitions_file
     <<-eof
 module.exports = function() {
-  this.Before("@#{@service}", function (callback) {
+  this.Before({tags: ["@#{@service}"]}, function (callback) {
     this.service = new this.AWS.#{@klass}();
     callback();
   });

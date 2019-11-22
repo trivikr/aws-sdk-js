@@ -1,5 +1,5 @@
 module.exports = function() {
-  this.Before("@redshift", function (callback) {
+  this.Before({tags: ["@redshift"]}, function (callback) {
     this.service = new this.AWS.Redshift();
     callback();
   });

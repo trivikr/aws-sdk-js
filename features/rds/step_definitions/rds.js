@@ -1,7 +1,7 @@
 var jmespath = require('jmespath');
 
 module.exports = function() {
-  this.Before("@rds", function (callback) {
+  this.Before({tags: ["@rds"]}, function (callback) {
     this.service = new this.AWS.RDS();
     callback();
   });

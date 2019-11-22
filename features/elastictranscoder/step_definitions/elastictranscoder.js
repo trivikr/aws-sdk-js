@@ -1,5 +1,5 @@
 module.exports = function() {
-  this.Before("@elastictranscoder", function (callback) {
+  this.Before({tags: ["@elastictranscoder"]}, function (callback) {
     this.iam = new this.AWS.IAM();
     this.s3 = new this.AWS.S3();
     this.service = new this.AWS.ElasticTranscoder();
