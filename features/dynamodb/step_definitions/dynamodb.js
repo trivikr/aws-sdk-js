@@ -1,20 +1,18 @@
 var jmespath = require('jmespath');
 
 module.exports = function() {
-  this.Before('@dynamodb-2011-12-05', function (next) {
+  this.Before('@dynamodb-2011-12-05', function () {
     this.service = new this.AWS.DynamoDB({
       apiVersion: '2011-12-05',
       maxRetries: 2
     });
-    next();
   });
 
-  this.Before('@dynamodb-2012-08-10', function (next) {
+  this.Before('@dynamodb-2012-08-10', function () {
     this.service = new this.AWS.DynamoDB({
       apiVersion: '2012-08-10',
       maxRetries: 2
     });
-    next();
   });
 
   function createTable(world, callback) {
