@@ -1,5 +1,5 @@
 module.exports = function() {
-  this.Before('@autoscaling', function (callback) {
+  this.Before({tags: ["@autoscaling"]}, function (callback) {
     this.service = new this.AWS.AutoScaling();
     callback();
   });
