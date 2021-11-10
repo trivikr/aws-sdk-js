@@ -1,5 +1,4 @@
 var helpers = require('./../helpers');
-var getMetadataServiceEndpoint = require('../../lib/metadata_service/get_metadata_service_endpoint');
 
 var Endpoint = require('../../lib/metadata_service/endpoint');
 var EndpointMode = require('../../lib/metadata_service/endpoint_mode');
@@ -13,7 +12,8 @@ if (AWS.util.isNode()) {
       it('returns endpoint', function() {
         var mockEndpoint = 'http://127.0.0.1';
         helpers.spyOn(AWS.util, 'loadConfig').andReturn(mockEndpoint);
-        expect(getMetadataServiceEndpoint()).to.equal(mockEndpoint);
+        var metadata_service = new AWS.MetadataService();
+        expect(metadata_service.endpoint).to.equal(mockEndpoint);
       });
     });
 
@@ -30,7 +30,8 @@ if (AWS.util.isNode()) {
               return endpointMode;
             }
           });
-          expect(getMetadataServiceEndpoint()).to.equal(endpoint);
+          var metadata_service = new AWS.MetadataService();
+          expect(metadata_service.endpoint).to.equal(endpoint);
         });
       });
 
@@ -44,7 +45,7 @@ if (AWS.util.isNode()) {
           }
         });
         expect(function() {
-          getMetadataServiceEndpoint();
+          new AWS.MetadataService();
         }).to['throw']('Unsupported endpoint mode: ' + invalidEndpointMode);
       });
     });
