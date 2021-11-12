@@ -356,12 +356,10 @@
   },
   "s3": {
     "name": "S3",
-    "dualstackAvailable": true,
     "cors": true
   },
   "s3control": {
     "name": "S3Control",
-    "dualstackAvailable": true,
     "xmlNoDefaultLists": true
   },
   "servicecatalog": {

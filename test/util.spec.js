@@ -1266,43 +1266,6 @@
     });
   });
 
-  describe('AWS.util.isDualstackAvailable', function() {
-    var metadata;
-    metadata = require('../apis/metadata.json');
-    beforeEach(function() {
-      return metadata.mock = {
-        name: 'MockService'
-      };
-    });
-    afterEach(function() {
-      return delete metadata.mock;
-    });
-    if (AWS.util.isNode()) {
-      it('accepts service identifier string as argument', function() {
-        expect(AWS.util.isDualstackAvailable('mock')).to.be['false'];
-        metadata.mock.dualstackAvailable = true;
-        return expect(AWS.util.isDualstackAvailable('mock')).to.be['true'];
-      });
-      it('accepts service client instance as argument', function() {
-        var service;
-        service = new helpers.MockService();
-        expect(AWS.util.isDualstackAvailable(service)).to.be['false'];
-        metadata.mock.dualstackAvailable = true;
-        return expect(AWS.util.isDualstackAvailable(service)).to.be['true'];
-      });
-      it('accepts service constructor as argument', function() {
-        expect(AWS.util.isDualstackAvailable(helpers.MockService)).to.be['false'];
-        metadata.mock.dualstackAvailable = true;
-        return expect(AWS.util.isDualstackAvailable(helpers.MockService)).to.be['true'];
-      });
-    }
-    return it('returns false if invalid service is given as argument', function() {
-      expect(AWS.util.isDualstackAvailable(null)).to.be['false'];
-      expect(AWS.util.isDualstackAvailable('invalid')).to.be['false'];
-      return expect(AWS.util.isDualstackAvailable({})).to.be['false'];
-    });
-  });
-
   describe('AWS.util.calculateRetryDelay', function() {
     beforeEach(function() {
       return helpers.spyOn(Math, 'random').andReturn(1);

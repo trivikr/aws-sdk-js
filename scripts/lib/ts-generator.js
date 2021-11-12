@@ -212,32 +212,6 @@ TSGenerator.prototype.generateDocString = function generateDocString(documentati
     return code;
 };
 
-/**
- * Returns an array of custom configuration options based on a service identiffier.
- * Custom configuration options are determined by checking the metadata.json file.
- */
-TSGenerator.prototype.generateCustomConfigFromMetadata = function generateCustomConfigFromMetadata(serviceIdentifier) {
-    // some services have additional configuration options that are defined in the metadata.json file
-    // i.e. dualstackAvailable = useDualstack
-    // create reference to custom options
-    var customConfigurations = [];
-    var serviceMetadata = this.metadata[serviceIdentifier];
-    // loop through metadata members
-    for (var memberName in serviceMetadata) {
-        if (!serviceMetadata.hasOwnProperty(memberName)) {
-            continue;
-        }
-        // check configs
-        switch (memberName) {
-            case 'dualstackAvailable':
-                customConfigurations.push(CUSTOM_CONFIG_ENUMS.DUALSTACK);
-                break;
-        }
-    }
-
-    return customConfigurations;
-};
-
 TSGenerator.prototype.generateSafeShapeName = function generateSafeShapeName(name, blacklist) {
     blacklist = blacklist || [];
     if (blacklist.indexOf(name) >= 0) {
@@ -551,17 +525,8 @@ TSGenerator.prototype.processServiceModel = function processServiceModel(service
     }
     code += 'import {ServiceConfigurationOptions} from \'../lib/service\';\n';
     // get any custom config options
-    var customConfig = this.generateCustomConfigFromMetadata(serviceIdentifier);
-    var hasCustomConfig = !!customConfig.length;
     var customConfigTypes = ['ServiceConfigurationOptions'];
     code += 'import {ConfigBase as Config} from \'../lib/config-base\';\n';
-    if (hasCustomConfig) {
-        // generate import statements and custom config type
-        customConfig.forEach(function(config) {
-            code += 'import {' + config.INTERFACE + '} from \'../lib/' + config.FILE_NAME + '\';\n';
-            customConfigTypes.push(config.INTERFACE);
-        });
-    }
     if (this.containsEventStreams(model)) {
         code += 'import {EventStream} from \'../lib/event-stream/event-stream\';\n';
     }
