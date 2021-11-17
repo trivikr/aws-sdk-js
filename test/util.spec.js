@@ -1266,7 +1266,7 @@
     });
   });
 
-  describe('AWS.util.isDualstackAvailable', function() {
+  describe('AWS.util.isLegacyDualstackAvailable', function() {
     var metadata;
     metadata = require('../apis/metadata.json');
     beforeEach(function() {
@@ -1279,27 +1279,27 @@
     });
     if (AWS.util.isNode()) {
       it('accepts service identifier string as argument', function() {
-        expect(AWS.util.isDualstackAvailable('mock')).to.be['false'];
+        expect(AWS.util.isLegacyDualstackAvailable('mock')).to.be['false'];
         metadata.mock.dualstackAvailable = true;
-        return expect(AWS.util.isDualstackAvailable('mock')).to.be['true'];
+        return expect(AWS.util.isLegacyDualstackAvailable('mock')).to.be['true'];
       });
       it('accepts service client instance as argument', function() {
         var service;
         service = new helpers.MockService();
-        expect(AWS.util.isDualstackAvailable(service)).to.be['false'];
+        expect(AWS.util.isLegacyDualstackAvailable(service)).to.be['false'];
         metadata.mock.dualstackAvailable = true;
-        return expect(AWS.util.isDualstackAvailable(service)).to.be['true'];
+        return expect(AWS.util.isLegacyDualstackAvailable(service)).to.be['true'];
       });
       it('accepts service constructor as argument', function() {
-        expect(AWS.util.isDualstackAvailable(helpers.MockService)).to.be['false'];
+        expect(AWS.util.isLegacyDualstackAvailable(helpers.MockService)).to.be['false'];
         metadata.mock.dualstackAvailable = true;
-        return expect(AWS.util.isDualstackAvailable(helpers.MockService)).to.be['true'];
+        return expect(AWS.util.isLegacyDualstackAvailable(helpers.MockService)).to.be['true'];
       });
     }
     return it('returns false if invalid service is given as argument', function() {
-      expect(AWS.util.isDualstackAvailable(null)).to.be['false'];
-      expect(AWS.util.isDualstackAvailable('invalid')).to.be['false'];
-      return expect(AWS.util.isDualstackAvailable({})).to.be['false'];
+      expect(AWS.util.isLegacyDualstackAvailable(null)).to.be['false'];
+      expect(AWS.util.isLegacyDualstackAvailable('invalid')).to.be['false'];
+      return expect(AWS.util.isLegacyDualstackAvailable({})).to.be['false'];
     });
   });
 
